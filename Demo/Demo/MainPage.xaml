@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:Demo"
+             x:Class="Demo.MainPage" Padding="10">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="btnStyle" TargetType="Button">
+                <Setter Property="Padding" Value="10,0" />
+                <Setter Property="FontSize" Value="Default" />
+                <Setter Property="TextColor" Value="DodgerBlue" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.Content>
+
+        <Grid RowSpacing="15">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30" />
+                <RowDefinition Height="1" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Button Text="Take Pictures" Style="{StaticResource btnStyle}"
+                Clicked="OnTakePicturesClicked" Grid.Row="0" Grid.Column="0" />
+
+            <Button Text="Pick Pictures" Style="{StaticResource btnStyle}"
+                Clicked="OnPickPicturesClicked" Grid.Row="0" Grid.Column="1" />
+
+            <BoxView Color="DodgerBlue" Grid.Row="1" Grid.ColumnSpan="2" />
+
+            <ListView x:Name="lvwPhotos" Grid.Row="2" Grid.ColumnSpan="2" RowHeight="304" 
+                      CachingStrategy="RetainElement" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Image WidthRequest="300" HeightRequest="300" Aspect="AspectFit"
+                               Source="{Binding .}" Margin="2"
+                               VerticalOptions="Center" HorizontalOptions="Center" />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+
+        </Grid>
+        
+    </ContentPage.Content>
+</ContentPage>

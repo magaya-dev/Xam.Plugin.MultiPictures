@@ -1,0 +1,108 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/2.0.29">
+
+  <PropertyGroup>
+    
+    <!--Work around so the conditions work below-->
+    <TargetFrameworks>Xamarin.iOS10;MonoAndroid81;netstandard2.0</TargetFrameworks>
+    
+    <!--Feel free to add as many targets as you need below
+    netstandard1.0;netstandard2.0;MonoAndroid81;Xamarin.iOS10;uap10.0.16299;Xamarin.TVOS10;Xamarin.WatchOS10;Xamarin.Mac20;Tizen40
+    For UWP update the version number with a version number you have installed.
+    -->
+    
+    <AssemblyName>Plugin.MultiPictures</AssemblyName>
+    <RootNamespace>Plugin.MultiPictures</RootNamespace>
+    <PackageId>Xam.Plugin.MultiPictures</PackageId>
+    
+    <Product>Plugin.MultiPictures</Product>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <AssemblyFileVersion>1.0.0.0</AssemblyFileVersion>
+    <Version>1.0.0.0</Version>
+    <PackageVersion>1.0.0.0</PackageVersion>
+    <PackOnBuild>true</PackOnBuild>
+    <NeutralLanguage>en</NeutralLanguage>
+    <LangVersion>default</LangVersion>
+    <DefineConstants>$(DefineConstants);</DefineConstants>
+    
+    <UseFullSemVerForNuGet>false</UseFullSemVerForNuGet>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+
+    <LangVersion>latest</LangVersion>
+    <DebugType>portable</DebugType>
+    
+    <!--TODO: Fill these in-->
+    <PackageLicenseUrl>LINK TO LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>LINK TO PROJECT</PackageProjectUrl>
+    <RepositoryUrl>LINK TO PROJECT</RepositoryUrl>
+    <PackageReleaseNotes>RELEASE NOTES</PackageReleaseNotes>
+    <PackageIconUrl>ICON URL</PackageIconUrl>
+    <PackageTags>xamarin, ios, android, xamarin.forms, plugin, Plugin.MultiPicture</PackageTags>
+    
+    <Title>Plugin.MultiPicture Plugin for Xamarin iOS and Xamarin Android</Title>
+    <Summary>Take and pick several pictures from a cross platform API</Summary>
+    <Description>Take and pick several pictures from a cross platform API</Description>
+    
+    <Owners>Magaya Corporation</Owners>
+    <Authors>Saimel Saez saimelsaez@gmail.com</Authors>
+    <Copyright>Copyright 2018</Copyright>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Company>Magaya Corporation http://www.magaya.com</Company>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)'=='Debug' ">
+    <DebugSymbols>true</DebugSymbols>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)'=='Release' ">
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard1.0|AnyCPU'">
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="**\*.shared.cs" />
+    <Compile Include="Utils\*.cs" />
+
+    <Compile Include="Views\CameraView.xaml.cs">
+      <DependentUpon>CameraView.xaml</DependentUpon>
+    </Compile>
+
+    <EmbeddedResource Update="Views\CameraView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+
+    <Compile Include="Views\PickPhotosPage.xaml.cs">
+      <DependentUpon>CameraView.xaml</DependentUpon>
+    </Compile>
+
+    <EmbeddedResource Update="Views\PickPhotosPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    
+  </ItemGroup>
+
+  <!--INCLUDE FILES AND REFERENCES ONLY FOR iOS-->
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('Xamarin.iOS')) ">
+    <Compile Include="**\*.apple.cs" />
+    <Compile Include="Apple\*.cs" />
+  </ItemGroup>
+
+  <!--INCLUDE FILES AND REFERENCES ONLY FOR ANDROID-->
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('MonoAndroid')) ">
+    <Compile Include="**\*.android.cs" />
+    <Compile Include="Droid\*.cs" />
+    <Compile Include="Droid\Listeners\*.cs" />
+  </ItemGroup>
+
+  <!--INCLUDE FILES AND REFENRECES ONLY FOR NETSTANDARD-->
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Plugin.Permissions" Version="3.0.0.12" />
+    <PackageReference Include="Xamarin.Forms" Version="4.1.0.581479" />
+  </ItemGroup>
+  
+</Project>
