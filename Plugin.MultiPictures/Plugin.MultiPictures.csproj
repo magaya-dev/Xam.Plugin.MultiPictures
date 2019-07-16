@@ -46,7 +46,7 @@
     <Authors>Saimel Saez saimelsaez@gmail.com</Authors>
     <Copyright>Copyright 2018</Copyright>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <Company>Magaya Corporation http://www.magaya.com</Company>
   </PropertyGroup>
 
