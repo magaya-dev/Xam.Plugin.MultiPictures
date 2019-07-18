@@ -26,16 +26,8 @@ namespace Plugin.MultiPictures
 
         public override string MediaFolderPath(MediaOptions mediaOptions)
         {
-            string path;
-
-            if (mediaOptions.UsePublicStorage == true)
-            {
-                path = Environment.GetFolderPath(Environment.SpecialFolder.MyPictures);
-            }
-            else
-            {
-                path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
-            }
+            var specialFolder = mediaOptions.UsePublicStorage == true ? Environment.SpecialFolder.MyPictures : Environment.SpecialFolder.MyDocuments;
+            string path = Environment.GetFolderPath(specialFolder);
 
             var result = Path.Combine(path, mediaOptions.Directory);
 

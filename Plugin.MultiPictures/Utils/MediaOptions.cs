@@ -6,7 +6,7 @@ namespace Plugin.MultiPictures.Utils
         /// <summary>
         /// Directory name
         /// </summary>
-        public string Directory { get; set; }
+        public string Directory { get; set; } = string.Empty;
 
         /// <summary>
         // Get or set if the image should be stored public
