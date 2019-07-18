@@ -32,8 +32,7 @@ namespace Demo
                     CompressionQuality = 90,
                     PhotoSize = PhotoSize.Medium,
                     SaveMetaData = true,
-                    UsePublicStorage = true,
-                    //Directory = "Magaya"
+                    Directory = "Magaya"
                 };
 
                 var cameraView = await CrossMultiPictures.Current.CameraView(mediaOptions);
@@ -66,7 +65,8 @@ namespace Demo
         {
             try
             {
-                var pickPage = new PickPhotosPage(new MediaOptions { /*Directory = "Magaya", */UsePublicStorage = true });
+                var mediaOptions = new MediaOptions { Directory = "Magaya" };
+                var pickPage = new PickPhotosPage(mediaOptions);
                 pickPage.PhotosSelected += (s, e) =>
                 {
                     _photos.Clear();

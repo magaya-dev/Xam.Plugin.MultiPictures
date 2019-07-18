@@ -1,8 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-
+﻿
 using Foundation;
+using ObjCRuntime;
+using Plugin.MultiPictures;
+using Plugin.MultiPictures.Utils;
 using UIKit;
 
 namespace Demo.iOS
@@ -22,10 +22,21 @@ namespace Demo.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
+            global::Xamarin.Forms.Forms.SetFlags("CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
+        }
+
+        public override UIInterfaceOrientationMask GetSupportedInterfaceOrientations(UIApplication application, [Transient] UIWindow forWindow)
+        {
+            if (CrossMultiPictures.Current.RequestedRotation == DeviceRotation.Unknown)
+            {
+                return UIInterfaceOrientationMask.All;
+            }
+
+            return UIInterfaceOrientationMask.Portrait;
         }
     }
 }
